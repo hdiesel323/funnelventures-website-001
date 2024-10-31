@@ -1,5 +1,6 @@
 import React from 'react';
-import { Check, X } from 'lucide-react';
+import { Check, X, ArrowRight } from 'lucide-react';
+import CalendlyButton from './CalendlyButton';
 
 const comparisonData = [
   {
@@ -31,7 +32,7 @@ const comparisonData = [
 
 export default function Comparison() {
   return (
-    <div className="py-24 bg-white">
+    <div className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl font-bold text-center text-gray-900 mb-4">How Do We Compare?</h2>
         <p className="text-xl text-gray-600 text-center mb-16 max-w-3xl mx-auto">
@@ -66,6 +67,15 @@ export default function Comparison() {
               ))}
             </tbody>
           </table>
+        </div>
+
+        <div className="mt-12 text-center">
+          <p className="text-lg text-gray-600 mb-6">
+            Ready to experience the difference?
+          </p>
+          <CalendlyButton className="btn btn-primary">
+            Book a Free Strategy Call <ArrowRight className="ml-2 h-5 w-5" />
+          </CalendlyButton>
         </div>
       </div>
     </div>

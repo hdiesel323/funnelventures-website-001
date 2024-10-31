@@ -1,5 +1,6 @@
 import React from 'react';
-import { Target, Bot, Zap, MessageCircle, Clock, BarChart3, Users, Phone } from 'lucide-react';
+import { Target, Bot, Zap, MessageCircle, Clock, BarChart3, Users, Phone, ArrowRight } from 'lucide-react';
+import CalendlyButton from './CalendlyButton';
 
 const features = [
   {
@@ -53,7 +54,7 @@ export default function Features() {
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
           {features.map((feature) => (
             <div key={feature.title} className="group p-6 rounded-2xl transition-all duration-300 hover:bg-blue-50">
               <div className="inline-flex items-center justify-center p-3 bg-blue-100 rounded-xl group-hover:bg-blue-200 transition-colors">
@@ -63,6 +64,14 @@ export default function Features() {
               <p className="mt-2 text-gray-600 leading-relaxed">{feature.description}</p>
             </div>
           ))}
+        </div>
+
+        {/* New CTA Section */}
+        <div className="mt-16 text-center">
+          <h3 className="text-2xl font-semibold mb-4">Ready to boost your lead conversion?</h3>
+          <CalendlyButton className="btn btn-primary inline-flex">
+            Book a Free Strategy Call <ArrowRight className="ml-2 h-5 w-5" />
+          </CalendlyButton>
         </div>
       </div>
     </div>

@@ -1,13 +1,14 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
+import CalendlyButton from './CalendlyButton';
 
 interface FooterProps {
-  onBookCall: () => void;
+  onBookCall?: () => void;
 }
 
 export default function Footer({ onBookCall }: FooterProps) {
   return (
-    <footer className="bg-gray-900 text-white py-12">
+    <footer className="py-16 bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div>
@@ -15,9 +16,9 @@ export default function Footer({ onBookCall }: FooterProps) {
             <p className="text-gray-400 mb-6">
               Start today with a 30-minute intro call to see how we can drive growth for your home services business — risk-free.
             </p>
-            <button onClick={onBookCall} className="btn btn-primary">
-              Book intro call <ArrowRight className="ml-2 h-5 w-5" />
-            </button>
+            <CalendlyButton className="btn btn-primary">
+              Book a Free Strategy Call <ArrowRight className="ml-2 h-5 w-5" />
+            </CalendlyButton>
             <p className="mt-4 text-sm text-gray-400">No credit card required</p>
           </div>
           <div className="text-right">

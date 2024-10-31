@@ -1,54 +1,156 @@
-import React, { useState } from 'react';
-import { MessageCircle, X, Send } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { MessageCircle, X, Send, ArrowRight } from 'lucide-react';
+import CalendlyButton from './CalendlyButton';
 
 interface Message {
   type: 'user' | 'ai';
-  content: string;
+  content: React.ReactNode;
 }
 
 const initialMessages: Message[] = [
   {
     type: 'ai',
-    content: "👋 Hi! I'm your AI assistant. I can help you learn more about our lead generation services or schedule a call. What would you like to know?"
+    content: "👋 Hi! I'm your AI assistant. I can help answer questions about our lead generation services or schedule a strategy call. What would you like to know?"
   }
 ];
+
+// Enhanced knowledge base with more keywords and detailed responses
+const knowledgeBase = {
+  services: {
+    keywords: ['offer', 'service', 'provide', 'help', 'what'],
+    response: "We offer AI-powered lead generation and conversion services including: \n\n" +
+      "• 24/7 Lead Qualification & Response\n" +
+      "• Automated Follow-up Systems\n" +
+      "• Smart Lead Routing\n" +
+      "• Real-time Analytics\n\n" +
+      "Would you like to learn more about any specific service?"
+  },
+  pricing: {
+    keywords: ['price', 'cost', 'pricing', 'fee', 'charge', 'payment', 'expensive', 'money', 'pay'],
+    response: "We use a performance-based pricing model:\n\n" +
+      "• No upfront costs\n" +
+      "• No monthly fees\n" +
+      "• You only pay when we deliver results\n\n" +
+      "Would you like to schedule a call to discuss specific pricing for your business?"
+  },
+  process: {
+    keywords: ['work', 'process', 'start', 'begin', 'how', 'steps', 'get started'],
+    response: "Getting started is simple:\n\n" +
+      "1. Book a strategy call to discuss your goals\n" +
+      "2. We set up your AI lead system (24 hours)\n" +
+      "3. Start receiving qualified leads\n" +
+      "4. Only pay for results\n\n" +
+      "Ready to get started?"
+  },
+  ai: {
+    keywords: ['ai', 'artificial', 'intelligence', 'automated', 'automation', 'bot', 'system'],
+    response: "Our AI system provides:\n\n" +
+      "• Instant lead qualification 24/7\n" +
+      "• Personalized follow-up sequences\n" +
+      "• Smart lead scoring and routing\n" +
+      "• Performance optimization\n\n" +
+      "Would you like to see how it works?"
+  },
+  results: {
+    keywords: ['results', 'roi', 'return', 'success', 'performance', 'stats', 'statistics', 'work'],
+    response: "Our clients typically see:\n\n" +
+      "• 40% increase in lead conversion rates\n" +
+      "• 2-3x revenue growth\n" +
+      "• 24/7 lead response coverage\n" +
+      "• Reduced sales team workload\n\n" +
+      "Want to learn what results we could achieve for your business?"
+  }
+};
 
 export default function AiChat() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [input, setInput] = useState('');
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  const generateResponse = (userInput: string): Message => {
+    const lowercaseInput = userInput.toLowerCase();
+
+    // Check for scheduling/booking intent
+    if (lowercaseInput.includes('schedule') || lowercaseInput.includes('book') || lowercaseInput.includes('call') || lowercaseInput.includes('appointment')) {
+      return {
+        type: 'ai',
+        content: (
+          <div>
+            <p className="mb-4">I'd be happy to help you schedule a strategy call with our team.</p>
+            <CalendlyButton className="w-full btn btn-primary">
+              Book a Free Strategy Call <ArrowRight className="ml-2 h-5 w-5" />
+            </CalendlyButton>
+          </div>
+        )
+      };
+    }
+
+    // Check knowledge base for matching topics
+    for (const [topic, info] of Object.entries(knowledgeBase)) {
+      if (info.keywords.some(keyword => lowercaseInput.includes(keyword))) {
+        return {
+          type: 'ai',
+          content: (
+            <div>
+              <p className="whitespace-pre-line">{info.response}</p>
+              <div className="mt-4">
+                <CalendlyButton className="w-full btn btn-primary">
+                  Book a Free Strategy Call <ArrowRight className="ml-2 h-5 w-5" />
+                </CalendlyButton>
+              </div>
+            </div>
+          )
+        };
+      }
+    }
+
+    // Default response for unrecognized queries
+    return {
+      type: 'ai',
+      content: (
+        <div>
+          <p className="mb-4">
+            I'd be happy to help you learn more about our lead generation services.
+            We can discuss your specific needs and how our AI-powered system can help grow your business.
+          </p>
+          <CalendlyButton className="w-full btn btn-primary">
+            Book a Free Strategy Call <ArrowRight className="ml-2 h-5 w-5" />
+          </CalendlyButton>
+        </div>
+      )
+    };
+  };
 
   const handleSend = () => {
     if (!input.trim()) return;
 
     // Add user message
-    setMessages(prev => [...prev, { type: 'user', content: input }]);
+    const userMessage: Message = { type: 'user', content: input };
+    setMessages(prev => [...prev, userMessage]);
 
-    // Simulate AI response
+    // Generate AI response with slight delay for natural feel
     setTimeout(() => {
-      const aiResponse = getAIResponse(input);
-      setMessages(prev => [...prev, { type: 'ai', content: aiResponse }]);
-    }, 1000);
+      const aiResponse = generateResponse(input);
+      setMessages(prev => [...prev, aiResponse]);
+    }, 500);
 
     setInput('');
   };
 
-  const getAIResponse = (userInput: string) => {
-    const input = userInput.toLowerCase();
-    
-    if (input.includes('pricing') || input.includes('cost')) {
-      return "We operate on a performance-based model - you only pay when we deliver results. This means no upfront costs or monthly fees. Would you like to schedule a call to discuss specific numbers?";
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
     }
-    
-    if (input.includes('start') || input.includes('begin')) {
-      return "Getting started is easy! We can have you up and running within 24 hours. The first step is to schedule a quick intro call where we'll discuss your goals and target market. Would you like me to help you book that call?";
-    }
-    
-    if (input.includes('ai') || input.includes('automation')) {
-      return "Our AI system handles lead qualification, follow-ups, and nurturing automatically. This means your team can focus on closing deals while our AI ensures no opportunity slips through the cracks. Want to see it in action?";
-    }
-    
-    return "I'd be happy to help you with that. Would you like to schedule a quick call with our team to discuss this in detail?";
   };
 
   return (
@@ -80,16 +182,16 @@ export default function AiChat() {
                 className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 <div
-                  className={`max-w-[80%] p-3 rounded-lg ${
-                    message.type === 'user'
+                  className={`max-w-[80%] p-3 rounded-lg ${message.type === 'user'
                       ? 'bg-blue-600 text-white rounded-br-none'
                       : 'bg-gray-100 text-gray-900 rounded-bl-none'
-                  }`}
+                    }`}
                 >
                   {message.content}
                 </div>
               </div>
             ))}
+            <div ref={messagesEndRef} />
           </div>
 
           {/* Input */}
@@ -99,7 +201,7 @@ export default function AiChat() {
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+                onKeyPress={handleKeyPress}
                 placeholder="Type your message..."
                 className="flex-1 p-2 border rounded-lg focus:outline-none focus:border-blue-600"
               />

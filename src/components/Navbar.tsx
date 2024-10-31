@@ -1,8 +1,9 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
+import CalendlyButton from './CalendlyButton';
 
 interface NavbarProps {
-  onBookCall: () => void;
+  onBookCall?: () => void;
 }
 
 export default function Navbar({ onBookCall }: NavbarProps) {
@@ -17,9 +18,9 @@ export default function Navbar({ onBookCall }: NavbarProps) {
             </span>
           </div>
           <div className="flex items-center gap-6">
-            <button onClick={onBookCall} className="btn btn-primary">
-              Book a Call <ArrowRight className="ml-2 h-5 w-5" />
-            </button>
+            <CalendlyButton>
+              Book a Free Strategy Call <ArrowRight className="ml-2 h-5 w-5" />
+            </CalendlyButton>
           </div>
         </div>
       </div>

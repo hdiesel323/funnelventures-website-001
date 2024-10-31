@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, ArrowRight } from 'lucide-react';
+import CalendlyButton from './CalendlyButton';
 
 const faqs = [
   {
@@ -32,7 +33,7 @@ export default function FAQ() {
   };
 
   return (
-    <div className="py-24 bg-gray-50">
+    <div className="py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
@@ -47,10 +48,9 @@ export default function FAQ() {
               >
                 <div className="flex justify-between items-center">
                   <h3 className="text-xl font-semibold text-gray-900">{faq.question}</h3>
-                  <ChevronDown 
-                    className={`h-5 w-5 text-gray-400 transition-transform duration-200 ${
-                      openIndex === index ? 'transform rotate-180' : ''
-                    }`}
+                  <ChevronDown
+                    className={`h-5 w-5 text-gray-400 transition-transform duration-200 ${openIndex === index ? 'transform rotate-180' : ''
+                      }`}
                   />
                 </div>
                 {openIndex === index && (
@@ -61,6 +61,15 @@ export default function FAQ() {
               </button>
             </div>
           ))}
+
+          <div className="mt-12 text-center">
+            <p className="text-lg text-gray-600 mb-6">
+              Have more questions? Let's discuss your specific needs
+            </p>
+            <CalendlyButton className="btn btn-primary">
+              Book a Free Strategy Call <ArrowRight className="ml-2 h-5 w-5" />
+            </CalendlyButton>
+          </div>
         </div>
       </div>
     </div>
