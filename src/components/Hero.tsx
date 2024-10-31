@@ -8,8 +8,8 @@ interface HeroProps {
 
 export default function Hero({ onBookCall }: HeroProps) {
   return (
-    <div className="min-h-[70vh] flex items-center pt-16 pb-12 bg-gradient-to-b from-blue-50 via-white to-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="min-h-[60vh] flex items-center pt-20 pb-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-4xl mx-auto">
           <div className="mb-4 inline-flex items-center px-4 py-1.5 rounded-full bg-blue-100 text-blue-600">
             <span className="text-sm font-medium">Average 40% increase in lead conversion rates</span>

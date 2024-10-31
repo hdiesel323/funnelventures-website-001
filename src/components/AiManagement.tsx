@@ -31,7 +31,7 @@ export default function AiManagement() {
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">AI-Powered Lead Management</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Let our advanced AI system handle the heavy lifting of lead management, 
+            Let our advanced AI system handle the heavy lifting of lead management,
             so your team can focus on what they do best - closing deals.
           </p>
         </div>
@@ -46,36 +46,6 @@ export default function AiManagement() {
               <p className="text-gray-600 leading-relaxed">{feature.description}</p>
             </div>
           ))}
-        </div>
-
-        <div className="mt-12 p-8 bg-blue-600 rounded-2xl text-white">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            <div>
-              <h3 className="text-2xl font-bold mb-4">Why AI-Driven Management?</h3>
-              <ul className="space-y-3">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Reduce response time from hours to seconds</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Never miss a follow-up opportunity</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Personalized communication at scale</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Data-driven optimization of your sales process</span>
-                </li>
-              </ul>
-            </div>
-            <div className="text-center">
-              <div className="text-5xl font-bold mb-2">40%</div>
-              <div className="text-xl opacity-90">Average increase in lead conversion rate</div>
-            </div>
-          </div>
         </div>
       </div>
     </div>

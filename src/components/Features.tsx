@@ -1,40 +1,33 @@
 import React from 'react';
-import { Target, Bot, Zap, MessageCircle, Clock, BarChart3, Users, Phone, ArrowRight } from 'lucide-react';
+import { Clock, Users, Phone, BarChart3, ArrowRight } from 'lucide-react';
 import CalendlyButton from './CalendlyButton';
 
 const features = [
   {
     title: '24/7 AI-Powered Response',
     description: 'Never miss a lead with our AI system that handles calls and inquiries round-the-clock, providing instant support and qualification.',
-    icon: Clock,
+    icon: Clock
   },
   {
     title: 'Smart Lead Routing',
     description: 'Our AI automatically directs leads to the most qualified representative based on intent and expertise, improving conversion rates.',
-    icon: Users,
+    icon: Users
   },
   {
     title: 'Multi-Channel Integration',
     description: 'Seamlessly integrate with your existing CRM, communication platforms, and business intelligence tools like Salesforce, Twilio, and more.',
-    icon: Phone,
+    icon: Phone
   },
   {
     title: 'Real-Time Analytics',
     description: 'Get detailed insights into your lead conversion funnel with real-time reporting and AI-powered optimization suggestions.',
-    icon: BarChart3,
-  },
-];
-
-const results = [
-  { label: 'Faster Response Time', value: '24/7' },
-  { label: 'Lead Conversion Increase', value: '40%' },
-  { label: 'Revenue Growth', value: '2-3x' },
-  { label: 'Setup Time', value: '24hrs' },
+    icon: BarChart3
+  }
 ];
 
 export default function Features() {
   return (
-    <div id="features" className="py-16 bg-white">
+    <div className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Perfect for Lead-Dependent Businesses</h2>
@@ -43,33 +36,47 @@ export default function Features() {
           </p>
         </div>
 
-        {/* Results Stats */}
+        {/* Stats Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
-          {results.map((stat) => (
-            <div key={stat.label} className="text-center">
-              <div className="text-4xl font-bold text-blue-600 mb-2">{stat.value}</div>
-              <div className="text-gray-600">{stat.label}</div>
-            </div>
-          ))}
+          <div className="text-center">
+            <div className="text-4xl font-bold text-blue-600 mb-2">24/7</div>
+            <div className="text-gray-600">Faster Response Time</div>
+          </div>
+          <div className="text-center">
+            <div className="text-4xl font-bold text-blue-600 mb-2">40%</div>
+            <div className="text-gray-600">Lead Conversion Increase</div>
+          </div>
+          <div className="text-center">
+            <div className="text-4xl font-bold text-blue-600 mb-2">2-3x</div>
+            <div className="text-gray-600">Revenue Growth</div>
+          </div>
+          <div className="text-center">
+            <div className="text-4xl font-bold text-blue-600 mb-2">24hrs</div>
+            <div className="text-gray-600">Setup Time</div>
+          </div>
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {features.map((feature) => (
-            <div key={feature.title} className="group p-6 rounded-2xl transition-all duration-300 hover:bg-blue-50">
-              <div className="inline-flex items-center justify-center p-3 bg-blue-100 rounded-xl group-hover:bg-blue-200 transition-colors">
-                <feature.icon className="h-6 w-6 text-blue-600" />
+            <div key={feature.title} className="flex flex-col">
+              <div className="flex items-start">
+                <div className="p-2 bg-blue-100 rounded-lg mr-4">
+                  <feature.icon className="h-6 w-6 text-blue-600" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">{feature.title}</h3>
+                  <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+                </div>
               </div>
-              <h3 className="mt-4 text-xl font-semibold text-gray-900">{feature.title}</h3>
-              <p className="mt-2 text-gray-600 leading-relaxed">{feature.description}</p>
             </div>
           ))}
         </div>
 
-        {/* New CTA Section */}
-        <div className="mt-16 text-center">
-          <h3 className="text-2xl font-semibold mb-4">Ready to boost your lead conversion?</h3>
-          <CalendlyButton className="btn btn-primary inline-flex">
+        {/* CTA Section */}
+        <div className="text-center mt-12">
+          <h3 className="text-2xl font-bold mb-4">Ready to boost your lead conversion?</h3>
+          <CalendlyButton className="btn btn-primary">
             Book a Free Strategy Call <ArrowRight className="ml-2 h-5 w-5" />
           </CalendlyButton>
         </div>

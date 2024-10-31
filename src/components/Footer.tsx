@@ -26,9 +26,9 @@ export default function Footer({ onBookCall }: FooterProps) {
             <div className="text-gray-400 text-sm">
               <p>© 2024 Funnel Ventures. All rights reserved.</p>
               <div className="mt-2">
-                <a href="#" className="hover:text-white">Terms</a>
+                <a href="/terms" target="_blank" rel="noopener noreferrer" className="hover:text-white">Terms</a>
                 <span className="mx-2">|</span>
-                <a href="#" className="hover:text-white">Privacy</a>
+                <a href="/privacy" target="_blank" rel="noopener noreferrer" className="hover:text-white">Privacy</a>
               </div>
             </div>
           </div>
