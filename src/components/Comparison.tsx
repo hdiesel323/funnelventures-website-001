@@ -1,6 +1,5 @@
 import React from 'react';
-import { Check, X, ArrowRight } from 'lucide-react';
-import CalendlyButton from './CalendlyButton';
+import { Check, X } from 'lucide-react';
 
 const comparisonData = [
   {
@@ -32,51 +31,40 @@ const comparisonData = [
 
 export default function Comparison() {
   return (
-    <div className="py-16 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl font-bold text-center text-gray-900 mb-4">How Do We Compare?</h2>
-        <p className="text-xl text-gray-600 text-center mb-16 max-w-3xl mx-auto">
-          See why our approach delivers better results for home service businesses
-        </p>
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead>
-              <tr className="border-b-2 border-gray-200">
-                <th className="py-4 px-6 text-left text-lg font-semibold text-gray-900">Feature</th>
-                <th className="py-4 px-6 text-center text-lg font-semibold text-gray-900">Traditional Agencies</th>
-                <th className="py-4 px-6 text-center text-lg font-semibold text-blue-600">Funnel Ventures</th>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="overflow-x-auto rounded-lg bg-gray-50/50">
+        <table className="w-full">
+          <thead>
+            <tr className="border-b border-gray-200">
+              <th className="py-5 px-6 text-left text-[18px] font-semibold">Feature</th>
+              <th className="py-5 px-6 text-left text-[18px] font-semibold">Traditional Agencies</th>
+              <th className="py-5 px-6 text-left text-[18px] font-semibold text-[#2563EB]">Funnel Ventures</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonData.map((item, index) => (
+              <tr key={index} className="border-b border-gray-100 hover:bg-gray-50/50">
+                <td className="py-5 px-6 text-[16px] font-medium text-gray-900">{item.category}</td>
+                <td className="py-5 px-6">
+                  <div className="flex items-center gap-3">
+                    <div className="w-5 h-5 flex items-center justify-center bg-red-100 rounded">
+                      <X className="h-3.5 w-3.5 text-red-500 flex-shrink-0" />
+                    </div>
+                    <span className="text-[16px] text-gray-500">{item.traditional}</span>
+                  </div>
+                </td>
+                <td className="py-5 px-6">
+                  <div className="flex items-center gap-3">
+                    <div className="w-5 h-5 flex items-center justify-center bg-green-100 rounded">
+                      <Check className="h-3.5 w-3.5 text-green-500 flex-shrink-0" />
+                    </div>
+                    <span className="text-[16px] text-gray-900">{item.funnel}</span>
+                  </div>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {comparisonData.map((item, index) => (
-                <tr key={index} className="border-b border-gray-200">
-                  <td className="py-4 px-6 text-gray-900">{item.category}</td>
-                  <td className="py-4 px-6 text-center">
-                    <div className="flex items-center justify-center gap-2">
-                      <X className="h-5 w-5 text-red-500" />
-                      <span className="text-gray-600">{item.traditional}</span>
-                    </div>
-                  </td>
-                  <td className="py-4 px-6 text-center">
-                    <div className="flex items-center justify-center gap-2">
-                      <Check className="h-5 w-5 text-green-500" />
-                      <span className="text-gray-900 font-medium">{item.funnel}</span>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <div className="mt-12 text-center">
-          <p className="text-lg text-gray-600 mb-6">
-            Ready to experience the difference?
-          </p>
-          <CalendlyButton className="btn btn-primary">
-            Book a Free Strategy Call <ArrowRight className="ml-2 h-5 w-5" />
-          </CalendlyButton>
-        </div>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
